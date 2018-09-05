@@ -1,14 +1,12 @@
-import cv2
-from pygame import mixer # Load the required library
-import os
-import serial
+import cv2 #opencv
+from pygame import mixer #run .mp3
+import serial #pyserial
 
-conexao = serial.Serial('COM7', 9600)
+conexao = serial.Serial('COM3', 9600)
 
 mixer.init()
 
-face_cascade = cv2.CascadeClassifier('opencv\sources\data\haarcascades\haarcascade_frontalface_default.xml')
-profile_cascade = cv2.CascadeClassifier('opencv\sources\data\haarcascades\haarcascade_profileface.xml')
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 cap = cv2.VideoCapture(0)
 
@@ -20,7 +18,6 @@ while True:
     ret, img = cap.read()
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-    profiles = profile_cascade.detectMultiScale(gray, 1.3, 5)
     
     
     for (x,y,w,h) in faces:
@@ -28,13 +25,7 @@ while True:
         roi_gray = gray[y:y+h, x:x+w]
         roi_color = img[y:y+h, x:x+w]
     
-    profiles = profile_cascade.detectMultiScale(gray, 1.3, 5)
-    for (px,py,pw,ph) in profiles:
-        cv2.rectangle(img,(px,py),(px+pw,py+ph),(255,0,0),2)
-        roi_gray = gray[py:py+ph, px:px+pw]
-        roi_color = img[py:py+ph, px:px+pw]
-    
-    if len(faces)+len(profiles) > 0:
+    if len(faces) > 0:
         negative = 0
         positive = positive + 1
         
