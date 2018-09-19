@@ -60,7 +60,7 @@ while True:
                            
                 mixer.music.load('tchau.mp3')
                 mixer.music.play()
-                #os.system("%systemroot%\system32\scrnsave.scr /s")
+#                os.system("%systemroot%\system32\scrnsave.scr /s")
             
     cv2.imshow('img',img)
     k = cv2.waitKey(30) & 0xff
