@@ -3,3 +3,7 @@
 A simple python code that detects a face and communicates by serial port with an Arduino.
 The code in Arduino moves a servo to wag a hand when detecting the face.
 
+Required Libraries:
+- OpenCV
+- Pygame
+- pySerial
